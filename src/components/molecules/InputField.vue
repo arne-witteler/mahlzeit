@@ -1,12 +1,48 @@
 <script setup>
+import Icon from '../atoms/Icon.vue';
+
 const props = defineProps({
-  label: String
+  label: String,
+  icon: String
 });
 </script>
 
 <template>
   <div class="input-field">
-    <label for="input" class="input-field__label">{{ props.label }}</label>
-    <input id="input" type="text" class="input-field__input" placeholder="Enter text here..." />
+
+    <div class="input-field__header">
+      <Icon v-if="icon" :name="icon" />
+      <span class="input-field__label">{{ label }}</span>
+    </div>
+
+    <div class="input-field__content">
+      <slot />
+    </div>
+
   </div>
 </template>
+
+<style scoped>
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-field__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.input-field__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-gray-dark);
+}
+
+.input-field__content {
+  display: flex;
+  gap: 8px;
+}
+</style>
