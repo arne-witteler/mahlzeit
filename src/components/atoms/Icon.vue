@@ -10,6 +10,7 @@ import cycleIcon from '@/images/bike.svg?component';
 import transitIcon from '@/images/bus-front.svg?component';
 import driveIcon from '@/images/car-front.svg?component';
 import plusIcon from '@/images/plus.svg?component';
+import locationIcon from '@/images/map-pin.svg?component';
 
 const iconMap = {
   logo: logoIcon,
@@ -20,7 +21,8 @@ const iconMap = {
   cycling: cycleIcon,
   transit: transitIcon,
   driving: driveIcon,
-  add: plusIcon
+  add: plusIcon,
+  location: locationIcon
 };
 
 type IconName = keyof typeof iconMap;
