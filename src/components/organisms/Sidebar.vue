@@ -5,16 +5,38 @@ import Button from '../atoms/Button.vue';
 import { ref } from 'vue';
 
 const members = ref([
-  { id: 1, name: 'Alice Johnson', avatar: '/src/images/person-icon.png' },
-  { id: 2, name: 'Bob Smith', avatar: '/src/images/person-icon.png' },
-  { id: 3, name: 'Charlie Davis', avatar: '/src/images/person-icon.png' },
+  {
+    id: 1,
+    name: 'Alice Johnson',
+    homeAddress: 'Prinzessinnenstraße 1, 10969 Berlin',
+    officeAddress: 'Prinzessinnenstraße 1, 10969 Berlin',
+    transport: 'walking'
+  },
+  {
+    id: 2,
+    name: 'Bob Smith',
+    homeAddress: 'Prinzessinnenstraße 1, 10969 Berlin',
+    officeAddress: 'Prinzessinnenstraße 1, 10969 Berlin',
+    transport: 'transit',
+    avatar: '/src/images / person - icon.png'
+  },
+  {
+    id: 3,
+    name: 'Charlie Davis',
+    homeAddress: 'Prinzessinnenstraße 1, 10969 Berlin',
+    officeAddress: 'Prinzessinnenstraße 1, 10969 Berlin',
+    transport: 'cycling',
+    avatar: '/src/images / person - icon.png'
+  },
 ]);
 
 function addMember() {
   members.value.push({
-    id: members.value.length + 1,
+    id: Date.now(),
     name: 'New Member',
-    avatar: '/src/images/person-icon.png'
+    homeAddress: 'Prinzessinnenstraße 1, 10969 Berlin',
+    officeAddress: 'Prinzessinnenstraße 1, 10969 Berlin',
+    transport: 'walking'
   });
 }
 
@@ -27,6 +49,16 @@ function updateTransport(id, transport) {
   if (member) {
     member.transport = transport;
   }
+}
+
+function updateHomeAddress(id, value) {
+  const member = members.value.find(m => m.id === id);
+  if (member) member.homeAddress = value;
+}
+
+function updateOfficeAddress(id, value) {
+  const member = members.value.find(m => m.id === id);
+  if (member) member.officeAddress = value;
 }
 
 </script>
@@ -53,8 +85,11 @@ function updateTransport(id, transport) {
 
       <ul class="member-card-list">
         <MemberCard v-for="member in members" :key="member.id" :id="member.id" :name="member.name"
-          :avatar="member.avatar" :transport="member.transport" @delete="removeMember"
-          @update-transport="(value) => updateTransport(member.id, value)" />
+          :avatar="member.avatar" :transport="member.transport" :homeAddress="member.homeAddress"
+          :officeAddress="member.officeAddress" @delete="removeMember"
+          @update-transport="(value) => updateTransport(member.id, value)"
+          @update:homeAddress="val => updateHomeAddress(member.id, val)"
+          @update:officeAddress="val => updateOfficeAddress(member.id, val)" />
       </ul>
     </div>
 

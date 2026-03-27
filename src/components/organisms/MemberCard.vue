@@ -1,31 +1,49 @@
 <script setup>
 import MemberHeader from '../molecules/MemberHeader.vue';
 import TransportOption from '../molecules/TransportOption.vue';
+import InputField from '../molecules/InputField.vue';
+import EditableField from '../molecules/EditableField.vue';
 
 const props = defineProps({
   id: Number,
   name: String,
   avatar: String,
-  transport: String
+  transport: String,
+  homeAddress: String,
+  officeAddress: String
 });
 
-const emit = defineEmits(['delete', 'update-transport']);
+const emit = defineEmits([
+  'delete',
+  'update-transport',
+  'update:homeAddress',
+  'update:officeAddress'
+]);
 </script>
 
 <template>
   <li class="member-card">
-    <MemberHeader :name="name" :avatar="avatar" @delete="emit('delete', id)" />
+    <MemberHeader :name="props.name" :avatar="props.avatar" @delete="emit('delete', props.id)" />
+
+    <InputField label="Home" icon="home">
+      <EditableField :modelValue="props.homeAddress" @update:modelValue="val => emit('update:homeAddress', val)" />
+    </InputField>
+
+    <InputField label="Office" icon="office">
+      <EditableField :modelValue="props.officeAddress" @update:modelValue="val => emit('update:officeAddress', val)" />
+    </InputField>
+
     <div class="member-card__transportation">
-      <TransportOption icon="walking" label="Zu Fuß" :selected="transport === 'walking'"
+      <TransportOption icon="walking" label="Zu Fuß" :selected="props.transport === 'walking'"
         @select="emit('update-transport', 'walking')" />
 
-      <TransportOption icon="transit" label="ÖPNV" :selected="transport === 'transit'"
+      <TransportOption icon="transit" label="ÖPNV" :selected="props.transport === 'transit'"
         @select="emit('update-transport', 'transit')" />
 
-      <TransportOption icon="cycling" label="Fahrrad" :selected="transport === 'cycling'"
+      <TransportOption icon="cycling" label="Fahrrad" :selected="props.transport === 'cycling'"
         @select="emit('update-transport', 'cycling')" />
 
-      <TransportOption icon="driving" label="Auto" :selected="transport === 'driving'"
+      <TransportOption icon="driving" label="Auto" :selected="props.transport === 'driving'"
         @select="emit('update-transport', 'driving')" />
     </div>
   </li>
