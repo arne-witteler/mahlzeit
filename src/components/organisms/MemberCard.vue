@@ -33,6 +33,10 @@ const emit = defineEmits([
       <EditableField :modelValue="props.officeAddress" @update:modelValue="val => emit('update:officeAddress', val)" />
     </InputField>
 
+
+    <h4 class="member-card__transportation-title">
+      Transport Mode
+    </h4>
     <div class="member-card__transportation">
       <TransportOption icon="walking" label="Zu Fuß" :selected="props.transport === 'walking'"
         @select="emit('update-transport', 'walking')" />

@@ -27,18 +27,20 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 }
 
 .input-field__header {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
 }
 
 .input-field__label {
   font-size: 12px;
   font-weight: 500;
   color: var(--color-gray-dark);
+  align-self: flex-end;
 }
 
 .input-field__content {
